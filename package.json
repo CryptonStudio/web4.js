@@ -1,0 +1,16 @@
+{
+  "name": "@cryptonteam/web4",
+  "version": "0.0.1",
+  "description": "Ethereum JavaScript API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "cryptonteam <info@crypton.studio>",
+  "license": "MIT",
+  "dependencies": {
+    "@truffle/contract": "^4.2.30",
+    "@truffle/hdwallet-provider": "^1.2.0",
+    "dotenv": "^8.2.0"
+  }
+}

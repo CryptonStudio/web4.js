@@ -1,0 +1,25 @@
+name: Node-CI
+
+on: 
+  push:
+    branches: [ master ]
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: copy code files to container
+        uses: actions/checkout@v2
+
+      - name: publish to npm
+        run: |
+            # Generates a .npmrc file configured for installing private modules:
+            printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${{ secrets.NPM_TOKEN }}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
+            # installs public and private moduless.
+            # npm install
+            # build dist
+            # npm run build 
+            # public to NPM
+            npm publish
