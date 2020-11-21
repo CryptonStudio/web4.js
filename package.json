@@ -1,6 +1,6 @@
 {
   "name": "@cryptonteam/web4",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Ethereum JavaScript API",
   "main": "index.js",
   "scripts": {
