@@ -4,7 +4,8 @@
   "description": "Ethereum JavaScript API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js",
+    "patch version": "npm version patch"
   },
   "author": "cryptonteam <info@crypton.studio>",
   "license": "MIT",

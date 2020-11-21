@@ -22,14 +22,16 @@ function Web4(
   this.getContractInstance = function(abi) {
     let instance = contract({ abi });
     instance.setProvider(provider);
+    
+    instance.defaults({from: instance.currentProvider.addresses[0]});
 
     instance.encodeABI = (method, ...theArgs) => {
       return this.contract.methods[method](theArgs).encodeABI();
     }
 
     instance.sendTransactionWithETH = (method, value, ...theArgs) => {
-      let data = this.encodeABI(method, theArgs);
-      return this.sendTransaction({ from: accounts[0], value, data });
+      let data = this.encodeABI(method, theArgs);      
+      return this.sendTransaction({ value, data });
     }
     return instance;
   }
