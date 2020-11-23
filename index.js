@@ -19,7 +19,7 @@ function Web4(
     wallet_hdpath
   );
 
-  this.getContractInstance = function(abi) {
+  this.getContractAbstraction = function(abi) {
     let instance = contract({ abi });
     instance.setProvider(provider);
     

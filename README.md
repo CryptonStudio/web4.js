@@ -22,7 +22,7 @@ var web4 = new Web4(
   process.env.INFURA
 );
 
-erc20 = web4.getContractInstance(abi);
+erc20 = web4.getContractAbstraction(abi);
 
 let test = async () => {
   
