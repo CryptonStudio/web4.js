@@ -32,7 +32,7 @@ const test = async () => {
     // }
     // );
 
-    instance.transfer("0xb346586D70396F8F7936eF8b225501c1EA841e4a", 1500000);
+    console.log(await instance.transfer("0xb346586D70396F8F7936eF8b225501c1EA841e4a", 1500000));
 
     console.log(instance.contract.methods.transfer("0xb346586D70396F8F7936eF8b225501c1EA841e4a", 1500000).encodeABI());
     console.log(instance.encodeABI("transfer", "0xb346586D70396F8F7936eF8b225501c1EA841e4a", 1500000));
@@ -45,3 +45,5 @@ const test = async () => {
 }
 
 test();
+
+
