@@ -19,21 +19,28 @@ function Web4(
     wallet_hdpath
   );
 
-  this.getContractAbstraction = function(abi) {
-    let instance = contract({ abi });
-    instance.setProvider(provider);
-    
-    instance.defaults({from: instance.currentProvider.addresses[0]});
+  this.getContractAbstraction = function (abi) {
+    let abstraction = contract({ abi });
+    abstraction.setProvider(provider);
 
-    instance.encodeABI = (method, ...theArgs) => {
-      return this.contract.methods[method](theArgs).encodeABI();
-    }
+    abstraction.defaults({ from: abstraction.currentProvider.addresses[0] });
 
-    instance.sendTransactionWithETH = (method, value, ...theArgs) => {
-      let data = this.encodeABI(method, theArgs);      
-      return this.sendTransaction({ value, data });
-    }
-    return instance;
+    abstraction.getInstance = async function (address) {
+      let instance = await this.at(address);
+
+      instance.encodeABI = function (method, ...theArgs) {       
+        return this.contract.methods[method].apply(this, theArgs).encodeABI();
+      }
+
+      instance.sendTransactionWithETH = function (method, value, ...theArgs) {
+        let data = this.encodeABI.apply(this, theArgs.unshift(method));
+        return this.sendTransaction({ value, data });
+      }
+      
+      return instance;
+    };
+
+    return abstraction;
   }
 
 };

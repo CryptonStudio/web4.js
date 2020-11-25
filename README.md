@@ -26,7 +26,7 @@ erc20 = web4.getContractAbstraction(abi);
 
 let test = async () => {
   
-  instance = await erc20.at("0xcbc351b996e6d724a0d3d351ad5953990348cf40");
+  instance = await erc20.getInstance("0xcbc351b996e6d724a0d3d351ad5953990348cf40");
 
   console.log(await instance.name());
   console.log(await instance.symbol());
