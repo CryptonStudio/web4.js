@@ -3,46 +3,54 @@ let contract = require("@truffle/contract");
 
 function Web4() {
   let provider;
+  let defaultAddress;
 
-  this.setProvider = function (_provider) {
+  this.setProvider = function (_provider, _address = "") {
     provider = _provider;
+    defaultAddress = _address;
   }
 
   this.setHDWalletProvider = function (
     mnemonic,
-    _provider,
-    address_index = 0,
-    num_addresses = 1,
+    providerOrUrl,
+    addressIndex = 0,
+    numberOfAddresses = 1,
     shareNonce = true,
-    wallet_hdpath = "m/44'/60'/0'/0/",
+    derivationPath = "m/44'/60'/0'/0/",
     pollingInterval = 600000
   ) {
-    provider = new HDWalletProvider(
-      mnemonic,
-      _provider,
-      address_index,
-      num_addresses,
+    provider = new HDWalletProvider({      
+      providerOrUrl,
+      addressIndex,
+      numberOfAddresses,
       shareNonce,
-      wallet_hdpath,
-      pollingInterval
-    );
+      derivationPath,
+      pollingInterval,
+      mnemonic,
+    });   
+
+    defaultAddress = provider.addresses[0];
 
     // stop polling for blocks
     provider.engine.stop();
   }
 
   // create smart contract abstraction object by ABI
-  this.getContractAbstraction = function (abi) {    
+  this.getContractAbstraction = function (abi) {
     // create abstraction
     let abstraction = contract({ abi });
-    // set HDWallet provider
+
+    // set current provider
     abstraction.setProvider(provider);
 
-    // set default account
-    abstraction.defaults({ from: abstraction.currentProvider.addresses[0] });
+    // set default account if defined
+    if (defaultAddress.trim()) {
+      abstraction.defaults({ from: defaultAddress });
+    }
 
     // use this function instead of this.at(...) to get instance
     abstraction.getInstance = async function (address) {
+
       let instance = await this.at(address);
 
       instance.encodeABI = function (method, ...theArgs) {
