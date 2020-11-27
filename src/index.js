@@ -1,35 +1,42 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 let contract = require("@truffle/contract");
 
-function Web4(
-  mnemonic,
-  provider,
-  address_index = 0,
-  num_addresses = 1,
-  shareNonce = true,
-  wallet_hdpath = "m/44'/60'/0'/0/",
-  pollingInterval = 600000
-) {
+function Web4() {
+  let provider;
 
-  provider = new HDWalletProvider(
+  this.setProvider = function (_provider) {
+    provider = _provider;
+  }
+
+  this.setHDWalletProvider = function (
     mnemonic,
-    provider,
-    address_index,
-    num_addresses,
-    shareNonce,
-    wallet_hdpath,
-    pollingInterval
-  );
+    _provider,
+    address_index = 0,
+    num_addresses = 1,
+    shareNonce = true,
+    wallet_hdpath = "m/44'/60'/0'/0/",
+    pollingInterval = 600000
+  ) {
+    provider = new HDWalletProvider(
+      mnemonic,
+      _provider,
+      address_index,
+      num_addresses,
+      shareNonce,
+      wallet_hdpath,
+      pollingInterval
+    );
 
-  // stop polling for blocks
-  provider.engine.stop();
+    // stop polling for blocks
+    provider.engine.stop();
+  }
 
   // create smart contract abstraction object by ABI
-  this.getContractAbstraction = function (abi) {
+  this.getContractAbstraction = function (abi) {    
     // create abstraction
     let abstraction = contract({ abi });
     // set HDWallet provider
-    abstraction.setProvider(provider);    
+    abstraction.setProvider(provider);
 
     // set default account
     abstraction.defaults({ from: abstraction.currentProvider.addresses[0] });
@@ -38,7 +45,7 @@ function Web4(
     abstraction.getInstance = async function (address) {
       let instance = await this.at(address);
 
-      instance.encodeABI = function (method, ...theArgs) {       
+      instance.encodeABI = function (method, ...theArgs) {
         return this.contract.methods[method].apply(this, theArgs).encodeABI();
       }
 
@@ -46,7 +53,7 @@ function Web4(
         let data = this.encodeABI.apply(this, theArgs.unshift(method));
         return this.sendTransaction({ value, data });
       }
-      
+
       return instance;
     };
 

@@ -17,10 +17,14 @@ const Web4 = require('@cryptonteam/web4');
 
 const abi = JSON.parse(fs.readFileSync("abi/ERC20.json", "utf8"));
 
-var web4 = new Web4(
+const web4 = new Web4();
+
+web4.setHDWalletProvider(
   process.env.OWNER_MNEMONIC,
   process.env.INFURA
 );
+
+// or you can use: web4.setProvider(web3Provider);
 
 erc20 = web4.getContractAbstraction(abi);
 
