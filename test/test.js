@@ -1,9 +1,9 @@
 require('dotenv').config();
 const fs = require('fs');
 const { exit } = require('process');
-const Web4 = require('./../index.js');
+const Web4 = require('./../src/index');
 
-const abi = JSON.parse(fs.readFileSync("abi/ERC20.json", "utf8"));
+const abi = JSON.parse(fs.readFileSync("../abi/ERC20.json", "utf8"));
 
 var web4 = new Web4(
   process.env.OWNER_MNEMONIC,
