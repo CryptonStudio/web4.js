@@ -1,7 +1,6 @@
 .env
 *.idea
 test
-dist
 docs
 coverage
 scripts

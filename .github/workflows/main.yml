@@ -18,8 +18,8 @@ jobs:
             # Generates a .npmrc file configured for installing private modules:
             printf "//`node -p \"require('url').parse(process.env.NPM_REGISTRY_URL || 'https://registry.npmjs.org').host\"`/:_authToken=${{ secrets.NPM_TOKEN }}\nregistry=${NPM_REGISTRY_URL:-https://registry.npmjs.org}\n" >> ~/.npmrc
             # installs public and private moduless.
-            # npm install
+            npm install
             # build dist
-            # npm run build 
+            npm run build:web
             # public to NPM
             npm publish

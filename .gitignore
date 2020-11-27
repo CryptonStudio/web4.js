@@ -16,6 +16,7 @@ node_modules
 packages/web3/dist/
 lerna-debug.log
 .nyc_output/
+dist
 build/
 contracts/
 migrations/
