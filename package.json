@@ -2,7 +2,7 @@
   "name": "@cryptonteam/web4",
   "version": "0.1.0",
   "description": "Ethereum JavaScript API",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "node test/test.js",
     "patch version": "npm version patch",
