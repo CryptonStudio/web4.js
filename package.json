@@ -1,12 +1,28 @@
 {
   "name": "@cryptonteam/web4",
   "version": "0.1.4",
-  "description": "Ethereum JavaScript API",
+  "description": "Abstraction for working with Ethereum smart contracts",
+  "keywords": [
+    "Ethereum",
+    "JavaScript",
+    "Web3",
+    "Truffle",
+    "Contract",
+    "Abstraction",
+    "Instance"
+  ],
   "main": "./src/index.js",
   "scripts": {
     "test": "node test/test.js",
-    "build:web": "webpack",
-    "patch": "npm version patch"
+    "build:web": "webpack"    
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CryptonStudio/web4.js.git"
+  },
+  "homepage": "https://github.com/CryptonStudio/web4.js",
+  "bugs": {
+      "url": "https://github.com/CryptonStudio/web4.js/issues"
   },
   "author": "cryptonteam <info@crypton.studio>",
   "license": "MIT",
