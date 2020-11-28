@@ -1,6 +1,6 @@
 {
   "name": "@cryptonteam/web4",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Abstraction for working with Ethereum smart contracts",
   "keywords": [
     "Ethereum",
@@ -14,7 +14,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "node test/test.js",
-    "build:web": "webpack"    
+    "build:web": "webpack"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/CryptonStudio/web4.js",
   "bugs": {
-      "url": "https://github.com/CryptonStudio/web4.js/issues"
+    "url": "https://github.com/CryptonStudio/web4.js/issues"
   },
   "author": "cryptonteam <info@crypton.studio>",
   "license": "MIT",
