@@ -8,7 +8,7 @@ $ npm install @cryptonteam/web4
 
 # Usage
 
-Send coins
+Read from contract, send transaction, get events.
 ```js
 
 require('dotenv').config();
@@ -26,6 +26,9 @@ web4.setHDWalletProvider(
 
 // or you can use: web4.setProvider(web3Provider);
 
+// you can add account by private key
+// web4.privateKeyToAccount("0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709");
+
 erc20 = web4.getContractAbstraction(abi);
 
 let test = async () => {
@@ -35,6 +38,18 @@ let test = async () => {
   console.log(await instance.name());
   console.log(await instance.symbol());
   console.log(await instance.decimals());
+
+  console.log(await instance.transfer("0xb346586D70396F8F7936eF8b225501c1EA841e4a", 1500000));
+
+  // to get encoded abi call use:
+  console.log(instance.encodeABI("transfer", "0xb346586D70396F8F7936eF8b225501c1EA841e4a", 1500000));
+
+  // to get event you can use:
+  let events = instance.contract.events.allEvents({
+      fromBlock: '7600000'
+  }, (error, result) => {
+      console.log(result);
+  });
 
   return true;
 }
