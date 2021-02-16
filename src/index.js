@@ -72,7 +72,8 @@ function Web4() {
       }
 
       instance.sendTransactionWithETH = function (method, value, ...theArgs) {
-        let data = this.encodeABI.apply(this, theArgs.unshift(method));
+        theArgs.unshift(method);
+        let data = this.encodeABI.apply(this, theArgs);
         return this.sendTransaction({ value, data });
       }
 

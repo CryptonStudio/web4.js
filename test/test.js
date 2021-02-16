@@ -9,15 +9,15 @@ const web4 = new Web4();
 
 const Web3 = require("web3");
 
-web4.setProvider(new Web3.providers.WebsocketProvider(process.env.INFURA));
-// or you can set default account: web4.setProvider(new Web3.providers.WebsocketProvider(process.env.INFURA), "0x6551d4eb508c59002cb486e1ac2d341262d5bfe2");
-web4.privateKeyToAccount("0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709");
+// web4.setProvider(new Web3.providers.WebsocketProvider(process.env.INFURA));
+// // or you can set default account: web4.setProvider(new Web3.providers.WebsocketProvider(process.env.INFURA), "0x6551d4eb508c59002cb486e1ac2d341262d5bfe2");
+// web4.privateKeyToAccount("0x348ce564d427a3311b6536bbcff9390d69395b06ed6c486954e971d960fe8709");
 
-// web4.setHDWalletProvider(
-//   process.env.OWNER_MNEMONIC,
-//   process.env.INFURA,
-//   //new Web3.providers.WebsocketProvider(process.env.INFURA),  
-// );
+web4.setHDWalletProvider(
+  process.env.MNEMONIC,
+  // process.env.INFURA,
+  new Web3.providers.WebsocketProvider(process.env.INFURA),  
+);
 
 const test = async () => {
   try {
@@ -26,7 +26,8 @@ const test = async () => {
 
     // to get tokens - send some ether to (rinkeby network) 0x43e982eA79499c21f6d1d3edf437E106AE64C14C
     // set gas limit ~100000 wei    
-    let instance = await erc20.getInstance("0x43e982eA79499c21f6d1d3edf437E106AE64C14C");
+    let instance = await erc20.getInstance("0x43e982eA79499c21f6d1d3edf437E106AE64C14C");    
+    console.log(erc20.currentProvider.engine);
 
     console.log(await instance.name());
     console.log(await instance.symbol());

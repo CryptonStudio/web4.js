@@ -20,7 +20,7 @@ const abi = JSON.parse(fs.readFileSync("abi/ERC20.json", "utf8"));
 const web4 = new Web4();
 
 web4.setHDWalletProvider(
-  process.env.OWNER_MNEMONIC,
+  process.env.MNEMONIC,
   process.env.INFURA
 );
 
