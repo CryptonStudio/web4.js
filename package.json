@@ -1,6 +1,6 @@
 {
   "name": "@cryptonteam/web4",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Abstraction for working with Ethereum smart contracts",
   "keywords": [
     "Ethereum",
