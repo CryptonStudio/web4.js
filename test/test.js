@@ -19,7 +19,7 @@ web4.setHDWalletProvider(
   new Web3.providers.WebsocketProvider(process.env.INFURA),  
 );
 
-const test = async () => {
+async function test () {
   try {
     const erc20 = web4.getContractAbstraction(abi);
     console.log(erc20.defaults());
@@ -54,6 +54,12 @@ const test = async () => {
   }
 }
 
-test();
-
+// We recommend this pattern to be able to use async/await everywhere
+// and properly handle errors.
+test()
+  .then(() => process.exit(0))
+  .catch(error => {
+    console.error(error);
+    process.exit(1);
+  });
 
